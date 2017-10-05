@@ -23,35 +23,30 @@
    `sudo touch site.vh.conf`
    `sudo nano site.vh.conf` 
    
+   ```
    server {
-       # General
+  
        charset utf-8;
    
-       # Log files for Debugging
-           access_log /var/log/nginx/site.vh_access.log;
-           error_log /var/log/nginx/site.vh_error.log;
+       access_log /var/log/nginx/site.vh_access.log;
+       error_log /var/log/nginx/site.vh_error.log;
    
-       # Webroot Directory for project
-           root /var/www/site.vh;
-           index index.php index.html index.htm;
+       root /var/www/site.vh;
+       index index.php index.html index.htm;
    
-       # Your Domain Name
        server_name site.vh;
    
-       # Check file exist and send request sting to index.php
        location / {
            try_files $uri $uri/ /index.php$is_args$args;
        }
    
-       # Allow execute all php files
-           location ~ \.php$ {
+       location ~ \.php$ {
            try_files $uri =404;
            fastcgi_split_path_info ^(.+\.php)(/.+)$;
-   
-          #fastcgi_pass  unix:/var/run/php/php7.1-fpm.sock;
+       
            fastcgi_pass  127.0.0.1:9000;
-   	       fastcgi_index /index.php;
-   
+           fastcgi_index /index.php;
+       
            include fastcgi_params;
            fastcgi_split_path_info       ^(.+\.php)(/.+)$;
            fastcgi_param PATH_INFO       $fastcgi_path_info;
@@ -59,22 +54,20 @@
            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
        }
    
-       # Turn off cache
        location ~* ^.+\.(js|css)$ {
            expires -1;
            sendfile off;
        }
    
-       # Disallow access to apache configs
        location ~ /\.ht {
            deny all;
        }
    
-       # Disallow access to git configs path
        location ~ /\.git {
            deny all;
        }
    }
+   ```
    
    `sudo ln -s /etc/nginx/sites-available/site.vh.conf /etc/nginx/sites-enabled/site.vh`
     
