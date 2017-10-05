@@ -15,7 +15,7 @@
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 2. Install [Vagrant](https://www.vagrantup.com/)
 3. Clone this project `git clone git@github.com:marcotorres/ubuntu-lemp-php7.git`
-4. Go to directory with README file (`cd vagrant-php7-phalcon`)
+4. Go to directory with README file (`cd ubuntu-lemp-php7`)
 5. Run `vagrant up`
 6. Edit host file `sudo nano /etc/hosts`  >> 192.168.3.42  site.vh
 7. Vagrant box Nginx virtual host
@@ -67,7 +67,7 @@
            deny all;
        }
    }
-   ```
+   ``
    
    `sudo ln -s /etc/nginx/sites-available/site.vh.conf /etc/nginx/sites-enabled/site.vh`
     
