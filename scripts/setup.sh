@@ -9,6 +9,7 @@ echo "============    BEGIN SETUP   ============="
 echo -e "----------------------------------------"
 sudo apt-get install -y language-pack-UTF-8
 sudo apt-get install -y build-essential python-software-properties software-properties-common
+sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
 sudo apt-get install -y re2c libpcre3-dev gcc make
 
@@ -38,7 +39,7 @@ apt-get install -y nginx  > /dev/null
 #
 echo -e "----------------------------------------"
 echo "VAGRANT ==> PHP 7"
-sudo apt-get install -y php7.0-fpm php7.0-cli php7.0-common php7.0-json php7.0-opcache php7.0-mysql php7.0-phpdbg php7.0-mbstring php7.0-gd php-imagick  php7.0-pgsql php7.0-pspell php7.0-recode php7.0-tidy php7.0-dev php7.0-intl php7.0-gd php7.0-curl php7.0-zip php7.0-xml php-memcached mcrypt memcached phpunit
+sudo apt-get install -y php7.1-fpm php7.1-cli php7.1-common php7.1-json php7.1-opcache php7.1-mysql php7.1-phpdbg php7.1-mbstring php7.1-gd php-imagick  php7.1-pgsql php7.1-pspell php7.1-recode php7.1-tidy php7.1-dev php7.1-intl php7.1-gd php7.1-curl php7.1-zip php7.1-xml php-memcached mcrypt memcached phpunit
 
 
 #
@@ -46,12 +47,12 @@ sudo apt-get install -y php7.0-fpm php7.0-cli php7.0-common php7.0-json php7.0-o
 #
 echo -e "----------------------------------------"
 echo "VAGRANT ==> Setup PHP 7"
-sudo sed -i 's/short_open_tag = Off/short_open_tag = On/' /etc/php/7.0/fpm/php.ini
-sudo sed -i 's/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ALL/' /etc/php/7.0/fpm/php.ini
-sudo sed -i 's/display_startup_errors = Off/display_startup_errors = On/' /etc/php/7.0/fpm/php.ini
-sudo sed -i 's/display_errors = Off/display_errors = On/' /etc/php/7.0/fpm/php.ini
-sudo sed -i 's/listen =/listen = 127.0.0.1:9000 ;/' /etc/php/7.0/fpm/pool.d/www.conf
-service php7.0-fpm restart
+sudo sed -i 's/short_open_tag = Off/short_open_tag = On/' /etc/php/7.1/fpm/php.ini
+sudo sed -i 's/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ALL/' /etc/php/7.1/fpm/php.ini
+sudo sed -i 's/display_startup_errors = Off/display_startup_errors = On/' /etc/php/7.1/fpm/php.ini
+sudo sed -i 's/display_errors = Off/display_errors = On/' /etc/php/7.1/fpm/php.ini
+sudo sed -i 's/listen =/listen = 127.0.0.1:9000 ;/' /etc/php/7.1/fpm/pool.d/www.conf
+service php7.1-fpm restart
 
 
 
@@ -85,7 +86,6 @@ echo -e "----------------------------------------"
 echo "VAGRANT ==> PHP Redis"
 git clone https://github.com/phpredis/phpredis.git
 cd phpredis
-git checkout php7
 phpize
 ./configure
 make && make install
@@ -93,13 +93,13 @@ cd ..
 rm -rf phpredis
 cd ~/
 echo "extension=redis.so" > ~/redis.ini
-cp ~/redis.ini /etc/php/7.0/mods-available/redis.ini
-ln -s /etc/php/7.0/mods-available/redis.ini /etc/php/7.0/fpm/conf.d/20-redis.ini
+cp ~/redis.ini /etc/php/7.1/mods-available/redis.ini
+ln -s /etc/php/7.1/mods-available/redis.ini /etc/php/7.1/fpm/conf.d/20-redis.ini
 
 echo -e "----------------------------------------"
 echo "VAGRANT ==> Restart Redis & PHP"
 service redis-server restart
-service php7.0-fpm restart
+service php7.1-fpm restart
 
 
 #
@@ -122,7 +122,7 @@ service mysql restart
 echo -e "----------------------------------------"
 echo "VAGRANT ==> Restart Nginx & PHP-FPM"
 sudo service nginx restart
-sudo service php7.0-fpm restart
+sudo service php7.1-fpm restart
 
 
 
