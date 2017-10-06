@@ -1,7 +1,7 @@
-# Ubuntu 16.04 Vagrant VM: PHP 7
+# Ubuntu 16.04 Vagrant VM: PHP 7.1
 * Git
 * Nginx
-* PHP7
+* PHP7.1
 * MySQL
 * Redis
 * Composer
