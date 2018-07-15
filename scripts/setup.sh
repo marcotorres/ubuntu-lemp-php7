@@ -39,7 +39,7 @@ apt-get install -y nginx  > /dev/null
 #
 echo -e "----------------------------------------"
 echo "VAGRANT ==> PHP 7"
-sudo apt-get install -y php7.1-fpm php7.1-cli php7.1-common php7.1-json php7.1-opcache php7.1-mysql php7.1-phpdbg php7.1-mbstring php7.1-gd php-imagick  php7.1-pgsql php7.1-pspell php7.1-recode php7.1-tidy php7.1-dev php7.1-intl php7.1-gd php7.1-curl php7.1-zip php7.1-xml php-memcached mcrypt memcached phpunit
+sudo apt-get install -y php7.2-fpm php7.2-cli php7.2-common php7.2-json php7.2-opcache php7.2-mysql php7.2-phpdbg php7.2-mbstring php7.2-gd php-imagick  php7.2-pgsql php7.2-pspell php7.2-recode php7.2-tidy php7.2-dev php7.2-intl php7.2-gd php7.2-curl php7.2-zip php7.2-xml php-memcached mcrypt memcached phpunit
 
 
 #
@@ -52,7 +52,7 @@ sudo sed -i 's/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporti
 sudo sed -i 's/display_startup_errors = Off/display_startup_errors = On/' /etc/php/7.1/fpm/php.ini
 sudo sed -i 's/display_errors = Off/display_errors = On/' /etc/php/7.1/fpm/php.ini
 sudo sed -i 's/listen =/listen = 127.0.0.1:9000 ;/' /etc/php/7.1/fpm/pool.d/www.conf
-service php7.1-fpm restart
+service php7.2-fpm restart
 
 
 
@@ -99,7 +99,7 @@ ln -s /etc/php/7.1/mods-available/redis.ini /etc/php/7.1/fpm/conf.d/20-redis.ini
 echo -e "----------------------------------------"
 echo "VAGRANT ==> Restart Redis & PHP"
 service redis-server restart
-service php7.1-fpm restart
+service php7.2-fpm restart
 
 
 #
@@ -122,7 +122,7 @@ service mysql restart
 echo -e "----------------------------------------"
 echo "VAGRANT ==> Restart Nginx & PHP-FPM"
 sudo service nginx restart
-sudo service php7.1-fpm restart
+sudo service php7.2-fpm restart
 
 
 
