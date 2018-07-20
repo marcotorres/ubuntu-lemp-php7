@@ -1,7 +1,7 @@
-# Ubuntu 16.04 Vagrant VM: PHP 7.1
+# Ubuntu 16.04 Vagrant VM: PHP 7.2
 * Git
 * Nginx
-* PHP7.1
+* PHP7.2
 * MySQL
 * Redis
 * Composer
@@ -76,7 +76,7 @@
 2. Make `mkdir site.vh`
 3. Restart Nginx and PHP
    `sudo service nginx restart`
-   `sudo service php7.0-fpm restart`
+   `sudo service php7.2-fpm restart`
 4. Open url `http://site.vh/`
 5. Enjoy :sunglasses:
 
