@@ -46,12 +46,12 @@ sudo apt-get install -y php7.2-fpm php7.2-cli php7.2-common php7.2-json php7.2-o
 # PHP Errors
 #
 echo -e "----------------------------------------"
-echo "VAGRANT ==> Setup PHP 7"
-sudo sed -i 's/short_open_tag = Off/short_open_tag = On/' /etc/php/7.1/fpm/php.ini
-sudo sed -i 's/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ALL/' /etc/php/7.1/fpm/php.ini
-sudo sed -i 's/display_startup_errors = Off/display_startup_errors = On/' /etc/php/7.1/fpm/php.ini
-sudo sed -i 's/display_errors = Off/display_errors = On/' /etc/php/7.1/fpm/php.ini
-sudo sed -i 's/listen =/listen = 127.0.0.1:9000 ;/' /etc/php/7.1/fpm/pool.d/www.conf
+echo "VAGRANT ==> Setup PHP 7.2"
+sudo sed -i 's/short_open_tag = Off/short_open_tag = On/' /etc/php/7.2/fpm/php.ini
+sudo sed -i 's/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ALL/' /etc/php/7.2/fpm/php.ini
+sudo sed -i 's/display_startup_errors = Off/display_startup_errors = On/' /etc/php/7.2/fpm/php.ini
+sudo sed -i 's/display_errors = Off/display_errors = On/' /etc/php/7.2/fpm/php.ini
+sudo sed -i 's/listen =/listen = 127.0.0.1:9000 ;/' /etc/php/7.2/fpm/pool.d/www.conf
 service php7.2-fpm restart
 
 
@@ -93,8 +93,8 @@ cd ..
 rm -rf phpredis
 cd ~/
 echo "extension=redis.so" > ~/redis.ini
-cp ~/redis.ini /etc/php/7.1/mods-available/redis.ini
-ln -s /etc/php/7.1/mods-available/redis.ini /etc/php/7.1/fpm/conf.d/20-redis.ini
+cp ~/redis.ini /etc/php/7.2/mods-available/redis.ini
+ln -s /etc/php/7.2/mods-available/redis.ini /etc/php/7.2/fpm/conf.d/20-redis.ini
 
 echo -e "----------------------------------------"
 echo "VAGRANT ==> Restart Redis & PHP"
