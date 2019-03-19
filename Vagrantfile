@@ -15,6 +15,7 @@ Vagrant.configure(2) do |config|
     config.vm.network "private_network", ip: "192.168.2.4"
 
     config.vm.provider :virtualbox do |v|
+	    v.name = "lemp73"
         v.customize ["modifyvm", :id, "--memory", "2048"]
         v.customize ["modifyvm", :id, "--vram", "32"]
     end
