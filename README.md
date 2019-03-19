@@ -1,8 +1,8 @@
-# Ubuntu 16.04 Vagrant VM: PHP 7.2
+# Ubuntu 18.10 Vagrant VM: PHP 7.3
 * Git
 * Nginx
-* PHP7.2
-* MySQL
+* PHP V7.3
+* MySQL V5.7
 * Redis
 * Composer
 * NodeJS
@@ -17,7 +17,7 @@
 3. Clone this project `git clone git@github.com:marcotorres/ubuntu-lemp-php7.git`
 4. Go to directory with README file (`cd ubuntu-lemp-php7`)
 5. Run `vagrant up`
-6. Edit host file `sudo nano /etc/hosts`  >> 192.168.3.3  site.vh
+6. Edit host file `sudo nano /etc/hosts`  >> 192.168.2.4  site.vh
 7. Vagrant box Nginx virtual host
    `cd  /etc/nginx/sites-available`
    `sudo touch site.vh.conf`
@@ -76,10 +76,53 @@
 2. Make `mkdir site.vh`
 3. Restart Nginx and PHP
    `sudo service nginx restart`
-   `sudo service php7.2-fpm restart`
+   `sudo service php7.3-fpm restart`
 4. Open url `http://site.vh/`
 5. Enjoy :sunglasses:
 
-# MySQL
+# MySQL Safe Manual Installation
+ ```
+sudo apt install mysql-server
+mysql_secure_installation
+mysql
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root
+FLUSH PRIVILEGES;
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+exit
+systemctl status mysql.service
+mysqladmin -p -u root version
+ ```
+   
 * login: `root`
 * password: `root`
+
+# Redis Safe Manual Installation
+https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04
+ ```
+sudo apt install redis-server
+sudo vim /etc/redis/redis.conf > supervised systemd
+sudo systemctl restart redis.service
+sudo systemctl status redis
+sudo redis-cli
+> ping
+sudo vim /etc/redis/redis.conf > bind 127.0.0.1 ::1
+sudo systemctl restart redis
+sudo netstat -lnp | grep redis
+sudo vim /etc/redis/redis.conf
+sudo openssl rand 60 | openssl base64 -A
+sudo requirepass foobared > change pass
+sudo systemctl restart redis.service
+```
+
+# ZSH Manual Installation
+```
+sudo apt-get install zsh
+wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | zsh
+sudo chsh -s `which zsh`
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+vim ~/.zshrc
+# en plugins agregar: zsh-syntax-highlighting zsh-autosuggestions
+source ~/.zshrc
+```
