@@ -1,4 +1,4 @@
-# Ubuntu 18.10 Vagrant VM: PHP 7.3
+# Ubuntu 19.04 Vagrant VM: PHP 7.3
 * Git
 * Nginx
 * PHP V7.3
@@ -90,11 +90,11 @@ vagrant plugin install vagrant-hostmanager
 
 # MySQL Safe Manual Installation
  ```
-sudo apt install mysql-server
-mysql_secure_installation
-mysql
+sudo apt install mysql-server -y
+sudo mysql_secure_installation
+sudo mysql
 SELECT user,authentication_string,plugin,host FROM mysql.user;
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
 FLUSH PRIVILEGES;
 SELECT user,authentication_string,plugin,host FROM mysql.user;
 exit

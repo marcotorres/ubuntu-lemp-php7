@@ -1,27 +1,31 @@
 #!/bin/bash
 # Using Ubuntu
 
-sudo echo "127.0.1.1 ubuntu-cosmic-cuttlefish" >> /etc/hosts
+sudo echo "127.0.1.1 ubuntu-disco-dingo" >> /etc/hosts
 
 #
 # Install
 #
 echo "============    BEGIN SETUP   ============="
 echo -e "----------------------------------------"
-sudo add-apt-repository ppa:ondrej/php
+sudo apt-get install -y language-pack-en-base
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+sudo apt-get install -y software-properties-common
+sudo add-apt-repository -y ppa:ondrej/php
 sudo apt-get update
 sudo apt-get install -y re2c libpcre3-dev gcc make
 
 echo -e "----------------------------------------"
 echo "VAGRANT ==> tools (mc, htop, unzip etc...)"
-sudo apt-get install -y mc htop unzip grc gcc make libpcre3 libpcre3-dev lsb-core autoconf > /dev/null
+sudo apt-get install -y mc htop unzip grc gcc make libpcre3 libpcre3-dev lsb-core autoconf
 
 #
 # Install Nginx
 #
 echo -e "----------------------------------------"
 echo "VAGRANT ==> Nginx"
-sudo apt-get install -y nginx  > /dev/null
+sudo apt-get install -y nginx
 
 #
 # php
@@ -41,15 +45,15 @@ sudo sed -i 's/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporti
 sudo sed -i 's/display_startup_errors = Off/display_startup_errors = On/' /etc/php/7.3/fpm/php.ini
 sudo sed -i 's/display_errors = Off/display_errors = On/' /etc/php/7.3/fpm/php.ini
 sudo sed -i 's/listen =/listen = 127.0.0.1:9000 ;/' /etc/php/7.3/fpm/pool.d/www.conf
-service php7.3-fpm restart
+sudo service php7.3-fpm restart
 
 #
 # composer
 #
 echo -e "----------------------------------------"
 echo "VAGRANT ==> Composer"
-curl -sS https://getcomposer.org/installer | php > /dev/null
-mv composer.phar /usr/local/bin/composer
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
 
 #
 # Frontend Tools (npm, nodejs, gulp)
