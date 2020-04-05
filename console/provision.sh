@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 
 main() {
-	startGo
-	setupGo
-	toolsGo
-	nginxGo
-	mysqlGo
-	phpGo
-	composerGo
-	nodeGo
-	zshGo
-	endGo
+  startGo
+  setupGo
+  toolsGo
+  nginxGo
+  mysqlGo
+  phpGo
+  composerGo
+  nodeGo
+  zshGo
+  endGo
 }
 
 startGo() {
-	echo "========    Lemp7 BOX - START   ========" && \
-	echo -e "========================================" && \
-	sudo bash -c "echo '127.0.1.1   ubuntu-disco-dingo' >> /etc/hosts"
+  echo "========    Lemp7 BOX - START   ========" && \
+  echo -e "========================================" && \
+  sudo bash -c "echo '127.0.1.1   ubuntu-disco-dingo' >> /etc/hosts"
 }
 
 setupGo() {
-	echo "---------------   SETUP   --------------" && \
+  echo "---------------   SETUP   --------------" && \
   echo -e "----------------------------------------" && \
   export LC_ALL=en_US.UTF-8 && \
   export LANG=en_US.UTF-8 && \
@@ -89,18 +89,18 @@ zshGo() {
   echo -e "----------------------------------------" && \
   cd /tmp && wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh && \
   sudo sh ./install.sh && rm ./install.sh && usermod --shell /bin/zsh root && \
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting && \
-	git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/plugins/zsh-autosuggestions && \
-	sed -i -e 's/git/git zsh-syntax-highlighting zsh-autosuggestions/' ~/.zshrc && \
-	sed -i -e 's/robbyrussell/risto/' ~/.zshrc
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting && \
+  git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/plugins/zsh-autosuggestions && \
+  sed -i -e 's/git/git zsh-syntax-highlighting zsh-autosuggestions/' ~/.zshrc && \
+  sed -i -e 's/robbyrussell/risto/' ~/.zshrc
 }
 
 endGo() {
   sudo usermod -a -G www-data vagrant && \
   echo "=========    Lemp7 BOX - END   =========" && \
-	echo -e "========================================" && \
+  echo -e "========================================" && \
   figlet Lemp7 && \
-	cowsay -f milk "Nunca confies en un ordenador que no puedas lanzar por una ventana. --->Steve Wozniak"
+  cowsay -f milk "Nunca confies en un ordenador que no puedas lanzar por una ventana. --->Steve Wozniak"
 }
 
 main
