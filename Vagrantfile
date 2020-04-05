@@ -40,5 +40,5 @@ Vagrant.configure(2) do |config|
         group: "www-data",
         mount_options: ["dmode=775,fmode=664"]
 
-    #config.vm.provision "shell", path: "./console/provision.sh"
+    config.vm.provision "shell", path: "./console/provision.sh"
 end

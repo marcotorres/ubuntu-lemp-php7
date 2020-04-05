@@ -20,7 +20,7 @@ startGo() {
 }
 
 setupGo() {
-	echo "--------------   SETUP   ------------" && \
+	echo "---------------   SETUP   --------------" && \
   echo -e "----------------------------------------" && \
   export LC_ALL=en_US.UTF-8 && \
   export LANG=en_US.UTF-8 && \
@@ -30,13 +30,13 @@ setupGo() {
 }
 
 toolsGo() {
-  echo "--------------   TOOL   ------------" && \
+  echo "---------------   TOOLS   --------------" && \
   echo -e "----------------------------------------" && \
   sudo apt-get install -y re2c libpcre3-dev gcc mc grc cowsay figlet zsh lsb-core
 }
 
 nginxGo() {
-  echo "--------------   NGINX   ------------" && \
+  echo "---------------   NGINX   --------------" && \
   echo -e "----------------------------------------" && \
   sudo apt-get install -y nginx && \
   sudo cp /vagrant/data/nginx/lemp7.vh.conf /etc/nginx/sites-available/lemp7.vh.conf && \
@@ -45,7 +45,7 @@ nginxGo() {
 }
 
 mysqlGo() {
-  echo "--------------   MYSQL   ------------" && \
+  echo "---------------   MYSQL   --------------" && \
   echo -e "----------------------------------------" && \
   sudo apt-get install -y mysql-server && \
   sudo cp /vagrant/data/mysql/.my.cnf /root/.my.cnf && \
@@ -54,7 +54,7 @@ mysqlGo() {
 }
 
 phpGo() {
-  echo "--------------   PHP   ------------" && \
+  echo "----------------   PHP   ---------------" && \
   echo -e "----------------------------------------" && \
   sudo apt-get install -y php7.3-fpm php7.3-mysql php7.3-phpdbg php7.3-mbstring php7.3-gd php-imagick && \
   sudo apt-get install -y php7.3-pgsql php7.3-pspell php7.3-recode php7.3-tidy php7.3-intl php7.3-curl && \
@@ -79,13 +79,13 @@ composerGo() {
 }
 
 nodeGo() {
-  echo "--------------   NODE   ------------" && \
+  echo "----------------   NODE   --------------" && \
   echo -e "----------------------------------------" && \
   sudo apt install -y nodejs npm
 }
 
 zshGo() {
-  echo "--------------   ZSH   ------------" && \
+  echo "----------------   ZSH   ---------------" && \
   echo -e "----------------------------------------" && \
   cd /tmp && wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh && \
   sudo sh ./install.sh && rm ./install.sh && usermod --shell /bin/zsh root && \
@@ -102,3 +102,6 @@ endGo() {
   figlet Lemp7 && \
 	cowsay -f milk "Nunca confies en un ordenador que no puedas lanzar por una ventana. --->Steve Wozniak"
 }
+
+main
+exit 0
