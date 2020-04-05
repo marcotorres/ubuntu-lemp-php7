@@ -26,7 +26,7 @@ vagrant plugin install vagrant-hostmanager
 ## Pasos
 1. Ve al directorio donde está ubicado el archivo README.md (`cd lemp7`)
 2. Ejecuta `vagrant up`
-3. Verifica que tu archivo hosts tenga la siguiente linea de instrucción `192.168.2.4  site.vh`
+3. Verifica que tu archivo hosts tenga la siguiente linea de instrucción `192.168.2.3  lemp7.vh`
 4. Visita en tu navegador el siguiente enlace [lemp7](http://lemp7.vh)
 
 # Adicionales
