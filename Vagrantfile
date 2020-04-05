@@ -2,7 +2,6 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-
     config.vm.box = "bento/ubuntu-19.10"
     config.vm.box_version = "202003.31.0"
     config.vm.box_check_update = false
