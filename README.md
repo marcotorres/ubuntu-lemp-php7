@@ -1,4 +1,4 @@
-# Ubuntu 19.04 Vagrant VM: PHP 7.3
+# Ubuntu 19.10 Vagrant VM: PHP 7.3
 * Git
 * Nginx
 * PHP V7.3
@@ -7,106 +7,43 @@
 * Composer
 * NodeJS
 * Npm
-* Gulp
 * Memcached
 * PHPUnit
+* Zsh
 
-# Quick install
-1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-2. Install [Vagrant](https://www.vagrantup.com/)
-3. Clone this project `git clone git@github.com:marcotorres/ubuntu-lemp-php7.git`
+# Instalación Rápida
+## Instala el Software Base
+1. Instalar [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+2. Instalar [Vagrant](https://www.vagrantup.com)
+3. Clona el proyecto `git clone git@github.com:<user>/ubuntu-lemp-php7.git lemp7`
 
-Instala dependencias de Vagrant
-
+## Instala Plugins Base de Vagrant
 ```
 vagrant plugin install vagrant-vbguest
 vagrant plugin install vagrant-hostmanager
 ```
 
-4. Go to directory with README file (`cd ubuntu-lemp-php7`)
-5. Run `vagrant up`
-6. Edit host file `sudo nano /etc/hosts`  >> 192.168.2.4  site.vh
-7. Vagrant box Nginx virtual host
-   `cd  /etc/nginx/sites-available`
-   `sudo touch site.vh.conf`
-   `sudo nano site.vh.conf`
+## Pasos
+1. Ve al directorio donde está ubicado el archivo README.md (`cd lemp7`)
+2. Ejecuta `vagrant up`
+3. Verifica que tu archivo hosts tenga la siguiente linea de instrucción `192.168.2.4  site.vh`
+4. Visita en tu navegador http://lemp7.vh
 
-   ```
-   server {
+# Adicionales
 
-       charset utf-8;
+## Manual de Instalación de oh-my-zsh para usuario vagrant
+```
+wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | zsh
+sudo chsh -s `which zsh`
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting && \
+git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/plugins/zsh-autosuggestions && \
+sed -i -e 's/git/git zsh-syntax-highlighting zsh-autosuggestions/' ~/.zshrc
+sed -i -e 's/robbyrussell/risto/' ~/.zshrc
+source ~/.zshrc
+```
 
-       access_log /var/log/nginx/site.vh_access.log;
-       error_log /var/log/nginx/site.vh_error.log;
-
-       root /var/www/site.vh;
-       index index.php index.html index.htm;
-
-       server_name site.vh;
-
-       location / {
-           try_files $uri $uri/ /index.php$is_args$args;
-       }
-
-       location ~ \.php$ {
-           try_files $uri =404;
-           fastcgi_split_path_info ^(.+\.php)(/.+)$;
-
-           fastcgi_pass  127.0.0.1:9000;
-           fastcgi_index /index.php;
-
-           include fastcgi_params;
-           fastcgi_split_path_info       ^(.+\.php)(/.+)$;
-           fastcgi_param PATH_INFO       $fastcgi_path_info;
-           fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
-           fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-       }
-
-       location ~* ^.+\.(js|css)$ {
-           expires -1;
-           sendfile off;
-       }
-
-       location ~ /\.ht {
-           deny all;
-       }
-
-       location ~ /\.git {
-           deny all;
-       }
-   }
-   ``
-
-   `sudo ln -s /etc/nginx/sites-available/site.vh.conf /etc/nginx/sites-enabled/site.vh`
-
-# Development
-1. Go to `cd /var/www/`
-2. Make `mkdir site.vh`
-3. Restart Nginx and PHP
-   `sudo service nginx restart`
-   `sudo service php7.3-fpm restart`
-4. Open url `http://site.vh/`
-5. Enjoy :sunglasses:
-
-# MySQL Safe Manual Installation
- ```
-sudo apt install mysql-server -y
-sudo mysql_secure_installation
-sudo mysql
-SELECT user,authentication_string,plugin,host FROM mysql.user;
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
-FLUSH PRIVILEGES;
-SELECT user,authentication_string,plugin,host FROM mysql.user;
-exit
-systemctl status mysql.service
-mysqladmin -p -u root version
- ```
-   
-* login: `root`
-* password: `root`
-
-# Redis Safe Manual Installation
-https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04
+# Manual de Instalación segura de Redis
+Enlace: https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04
  ```
 sudo apt install redis-server
 sudo vim /etc/redis/redis.conf > supervised systemd
@@ -121,16 +58,4 @@ sudo vim /etc/redis/redis.conf
 sudo openssl rand 60 | openssl base64 -A
 sudo requirepass foobared > change pass
 sudo systemctl restart redis.service
-```
-
-# ZSH Manual Installation
-```
-sudo apt-get install zsh
-wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | zsh
-sudo chsh -s `which zsh`
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-vim ~/.zshrc
-# en plugins agregar: zsh-syntax-highlighting zsh-autosuggestions
-source ~/.zshrc
 ```
