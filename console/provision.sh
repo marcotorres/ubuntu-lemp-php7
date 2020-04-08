@@ -51,6 +51,10 @@ mysqlGo() {
   sudo cp /vagrant/data/mysql/.my.cnf /root/.my.cnf && \
   sudo chmod 600 /root/.my.cnf && \
   sudo service mysql start
+mysql --user=root <<_EOF_
+  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';  	
+  FLUSH PRIVILEGES;
+_EOF_ 
 }
 
 phpGo() {
